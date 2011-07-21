@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="online">C:/Users/Polarkac/Desktop/online.png</file>
+    </qresource>
+</RCC>
