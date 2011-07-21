@@ -54,7 +54,7 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     /* case Qt::Key_F11:
         setWindowState(windowState() ^ Qt::WindowFullScreen); break; */
     case Qt::Key_F1:
-        QMessageBox::information(this, "Help", "Play game"); break;
+		QMessageBox::information(this, "Help", "How to play this game."); break;
     case Qt::Key_Escape:
         close(); break;
     default:
