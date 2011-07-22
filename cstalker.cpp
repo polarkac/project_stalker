@@ -5,6 +5,12 @@ CStalker::CStalker()
     iPosX = 50;
     iPosY = 600;
     imgStalker = new QImage(":/images/online");
+    bJump = FALSE;
+}
+
+CStalker::~CStalker()
+{
+    delete imgStalker;
 }
 
 void CStalker::Walk(Side orientation)
@@ -16,4 +22,29 @@ void CStalker::Walk(Side orientation)
     case RIGHT:
         iPosX += 5; break;
     }
+}
+
+void CStalker::HandleJump()
+{
+    if(bJump)
+    {
+        if(iPosY <= maxJump)
+            bJump = 2;
+        if(bJump == 1)
+        {
+            iPosY -= 5;
+        }
+        else if(bJump == 2)
+        {
+            iPosY += 5;
+        }
+        if(iPosY >= (maxJump + 100))
+            bJump = 0;
+    }
+}
+
+void CStalker::Jump()
+{
+    maxJump = iPosY - 100;
+    bJump = 1;
 }

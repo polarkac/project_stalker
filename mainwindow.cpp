@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     bEnd = FALSE;
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
+    connect(timer, SIGNAL(timeout()), hero, SLOT(HandleJump()));
     timer->start(10);
 }
 
