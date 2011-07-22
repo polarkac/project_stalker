@@ -6,7 +6,7 @@ CStalker::CStalker()
     iPosY = 200;
     imgStalker = new QImage;
     imgStalker->load(":/images/online");
-    bJump = FALSE;
+    bJump = 0;
 }
 
 CStalker::~CStalker()
