@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "cstalker.h"
 
-CStalker *hero = new CStalker;
+CStalker *hero;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,10 +12,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     someNumber = 100;
     bEnd = FALSE;
+    hero = new CStalker;
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
     connect(timer, SIGNAL(timeout()), hero, SLOT(HandleJump()));
     timer->start(10);
+
 }
 
 MainWindow::~MainWindow()
@@ -33,6 +35,7 @@ void MainWindow::paintEvent(QPaintEvent *)
 
 void MainWindow::keyPressEvent(QKeyEvent * event)
 {
+
     switch(event->key())
     {
     // dont change screen resolution so there is rectangle with app size
