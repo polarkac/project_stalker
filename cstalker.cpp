@@ -2,64 +2,61 @@
 
 CStalker::CStalker()
 {
-    iPosX = 100;
-    iPosY = 400;
-    imgStalker = new QImage;
-    imgStalker->load(":/images/online");
-    bJump = 0;
-    bWalk=0;
+    m_iPosX = 100;
+    m_iPosY = 400;
+    m_imgStalker = new QImage;
+    m_imgStalker->load(":/images/online");
+    m_iJump = 0;
+    m_iWalk = 0;
 }
 
 CStalker::~CStalker()
 {
-    delete imgStalker;
+    delete m_imgStalker;
 }
 
-void CStalker::Walk(Side orientation)
+void CStalker::SetWalk(int iNewWalk)
 {
-        if(orientation==LEFT)
-            bWalk=-1;
-        else
-            bWalk=1;
+    m_iWalk = iNewWalk;
 }
 
-void CStalker::HandleWalk()
+void CStalker::Walk()
 {
-    if(bWalk<0)
+    if(m_iWalk<0)
     {
-        iPosX -= 3;
-        bWalk--;
+        m_iPosX -= 3;
     }
-    else if(bWalk>0)
+    else if(m_iWalk>0)
     {
-        iPosX += 3;
-        bWalk++;
+        m_iPosX += 3;
     }
 }
+
+
 
 void CStalker::HandleJump()
 {
-    if(bJump)
+    if(m_iJump)
     {
-        if(iPosY <= maxJump)
-            bJump = 2;
-        if(bJump == 1)
+        if(m_iPosY <= m_maxJump)
+            m_iJump = 2;
+        if(m_iJump == 1)
         {
-            iPosY -= 5;
+            m_iPosY -= 5;
         }
-        else if(bJump == 2)
+        else if(m_iJump == 2)
         {
-            iPosY += 5;
+            m_iPosY += 5;
         }
-        if(iPosY >= (maxJump + 100))
-            bJump = 0;
+        if(m_iPosY >= (m_maxJump + 100))
+            m_iJump = 0;
     }
 }
 
 void CStalker::Jump()
 {
-    if(bJump > 0)
+    if(m_iJump > 0)
         return;
-    maxJump = iPosY - 100;
-    bJump = 1;
+    m_maxJump = m_iPosY - 100;
+    m_iJump = 1;
 }

@@ -15,27 +15,29 @@ public:
     explicit CStalker();
     ~CStalker();
 
-    int GetPosX() { return iPosX; };
-    int GetPosY() { return iPosY; };
-    const QImage GetImage() { return *imgStalker; };
-    void Walk(Side orientation);
+    int GetPosX() { return m_iPosX; };
+    int GetPosY() { return m_iPosY; };
+    int GetWalk() { return m_iWalk; }
+    const QImage GetImage() { return *m_imgStalker; };
+
     void Jump();
-    short int bWalk;
+    void SetWalk(int iNewWalk);
+
 
 private:
-    int iPosX;
-    int iPosY;
+    int m_iPosX;
+    int m_iPosY;
 
-    QImage *imgStalker;
-    int iHealth;
-    int iRadiation;
-    short int bJump;
-
-    int maxJump;
+    QImage *m_imgStalker;
+    int m_iHealth;
+    int m_iRadiation;
+    short int m_iJump;
+    short int m_iWalk;
+    int m_maxJump;
 
 public slots:
     void HandleJump();
-    void HandleWalk();
+    void Walk();
 };
 
 #endif // CSTALKER_H

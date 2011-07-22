@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
     connect(timer, SIGNAL(timeout()), hero, SLOT(HandleJump()));
-    connect(timer, SIGNAL(timeout()), hero, SLOT(HandleWalk()));
+    connect(timer, SIGNAL(timeout()), hero, SLOT(Walk()));
     timer->start(10);
 
     QPixmap backgroundImage(":/images/background");
@@ -54,9 +54,9 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     case Qt::Key_Escape:
         close(); break;
     case Qt::Key_Left:
-        hero->Walk(LEFT); break;
+        hero->SetWalk(-1); break;
     case Qt::Key_Right:
-        hero->Walk(RIGHT); break;
+        hero->SetWalk(1); break;
     case Qt::Key_Space:
         hero->Jump(); break;
     default:
@@ -69,12 +69,12 @@ void MainWindow::keyReleaseEvent(QKeyEvent *event)
     switch(event->key())
     {
     case Qt::Key_Left:
-        if(hero->bWalk<0)
-            hero->bWalk=0;
+        if(hero->GetWalk()<0)
+            hero->SetWalk(0);
         break;
     case Qt::Key_Right:
-        if(hero->bWalk>0)
-            hero->bWalk=0;
+        if(hero->GetWalk()>0)
+            hero->SetWalk(0);
         break;
     }
 }
