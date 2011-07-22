@@ -19,6 +19,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(timer, SIGNAL(timeout()), hero, SLOT(HandleWalk()));
     timer->start(10);
 
+    QPixmap backgroundImage(":/images/background");
+    QPalette p(palette());
+    p.setBrush(QPalette::Background, backgroundImage);
+    setAutoFillBackground(true);
+    setPalette(p);
+
+
 }
 
 
