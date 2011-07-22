@@ -20,6 +20,7 @@ public:
     const QImage GetImage() { return *imgStalker; };
     void Walk(Side orientation);
     void Jump();
+    short int bWalk;
 
 private:
     int iPosX;
@@ -29,10 +30,12 @@ private:
     int iHealth;
     int iRadiation;
     short int bJump;
+
     int maxJump;
 
 public slots:
     void HandleJump();
+    void HandleWalk();
 };
 
 #endif // CSTALKER_H

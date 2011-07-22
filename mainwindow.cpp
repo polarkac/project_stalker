@@ -16,9 +16,11 @@ MainWindow::MainWindow(QWidget *parent) :
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
     connect(timer, SIGNAL(timeout()), hero, SLOT(HandleJump()));
+    connect(timer, SIGNAL(timeout()), hero, SLOT(HandleWalk()));
     timer->start(10);
 
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -29,7 +31,6 @@ void MainWindow::paintEvent(QPaintEvent *)
 {
     QPainter *paint = new QPainter(this);
     paint->drawImage(hero->GetPosX(), hero->GetPosY(), hero->GetImage());
-
     delete paint;
 }
 
@@ -56,3 +57,17 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
     }
 }
 
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    switch(event->key())
+    {
+    case Qt::Key_Left:
+        if(hero->bWalk<0)
+            hero->bWalk=0;
+        break;
+    case Qt::Key_Right:
+        if(hero->bWalk>0)
+            hero->bWalk=0;
+        break;
+    }
+}

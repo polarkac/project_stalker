@@ -23,6 +23,7 @@ private:
     bool bEnd;
 
     void keyPressEvent(QKeyEvent *);
+    void keyReleaseEvent(QKeyEvent *);
 
 protected:
     void paintEvent(QPaintEvent *);

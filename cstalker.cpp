@@ -7,6 +7,7 @@ CStalker::CStalker()
     imgStalker = new QImage;
     imgStalker->load(":/images/online");
     bJump = 0;
+    bWalk=0;
 }
 
 CStalker::~CStalker()
@@ -16,13 +17,25 @@ CStalker::~CStalker()
 
 void CStalker::Walk(Side orientation)
 {
-    switch(orientation)
+        if(orientation==LEFT)
+            bWalk=-1;
+        else
+            bWalk=1;
+}
+
+void CStalker::HandleWalk()
+{
+    if(bWalk<0)
     {
-    case LEFT:
-        iPosX -= 5; break;
-    case RIGHT:
-        iPosX += 5; break;
+        iPosX -= 3;
+        bWalk--;
     }
+    else if(bWalk>0)
+    {
+        iPosX += 3;
+        bWalk++;
+    }
+
 }
 
 void CStalker::HandleJump()
