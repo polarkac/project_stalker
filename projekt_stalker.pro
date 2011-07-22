@@ -11,9 +11,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    cstalker.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    cstalker.h
 
 FORMS    += mainwindow.ui
 

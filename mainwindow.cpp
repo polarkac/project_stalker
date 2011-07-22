@@ -1,5 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "cstalker.h"
+
+CStalker *hero = new CStalker;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,8 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     bEnd = FALSE;
     QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(update()));
-    timer->start(25);
-
+    timer->start(10);
 }
 
 MainWindow::~MainWindow()
@@ -22,28 +24,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::paintEvent(QPaintEvent *)
 {
-    QPainter *painter = new QPainter(this);
-    QImage *image = new QImage(":/images/online");
-    QLine *line = new QLine(0, 0, someNumber, 100);
-    painter->drawImage(someNumber, 100, *image);
-    painter->drawLine(*line);
+    QPainter *paint = new QPainter(this);
+    paint->drawImage(hero->GetPosX(), hero->GetPosY(), hero->GetImage());
 
-    if(image->width()+someNumber >= 1024)
-        bEnd = TRUE;
-    else if(someNumber <= 0)
-        bEnd = FALSE;
-
-    switch(bEnd)
-    {
-    case TRUE:
-        someNumber -= 5; break;
-    case FALSE:
-        someNumber += 5; break;
-    }
-
-    delete painter;
-    delete image;
-    delete line;
+    delete paint;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent * event)
@@ -57,6 +41,12 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
 		QMessageBox::information(this, "Help", "How to play this game."); break;
     case Qt::Key_Escape:
         close(); break;
+    case Qt::Key_A:
+        hero->Walk(LEFT); break;
+    case Qt::Key_D:
+        hero->Walk(RIGHT); break;
+    case Qt::Key_Space:
+        hero->Jump(); break;
     default:
         break;
     }
