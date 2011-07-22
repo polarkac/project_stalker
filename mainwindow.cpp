@@ -42,9 +42,9 @@ void MainWindow::keyPressEvent(QKeyEvent * event)
 		QMessageBox::information(this, "Help", "How to play this game."); break;
     case Qt::Key_Escape:
         close(); break;
-    case Qt::Key_A:
+    case Qt::Key_Left:
         hero->Walk(LEFT); break;
-    case Qt::Key_D:
+    case Qt::Key_Right:
         hero->Walk(RIGHT); break;
     case Qt::Key_Space:
         hero->Jump(); break;

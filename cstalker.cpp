@@ -3,8 +3,9 @@
 CStalker::CStalker()
 {
     iPosX = 50;
-    iPosY = 600;
-    imgStalker = new QImage(":/images/online");
+    iPosY = 200;
+    imgStalker = new QImage;
+    imgStalker->load(":/images/online");
     bJump = FALSE;
 }
 
@@ -45,6 +46,8 @@ void CStalker::HandleJump()
 
 void CStalker::Jump()
 {
+    if(bJump > 0)
+        return;
     maxJump = iPosY - 100;
     bJump = 1;
 }
