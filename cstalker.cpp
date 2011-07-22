@@ -3,8 +3,8 @@
 CStalker::CStalker()
 {
     iPosX = 50;
-    iPosY = 600;
-    imgStalker = new QImage(":/images/online");
+    iPosY = 200;
+    imgStalker = new QImage(":/images/online.png");
     bJump = FALSE;
 }
 
