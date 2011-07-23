@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/images">
-        <file alias="online">images/online.png</file>
         <file alias="background">images/Background.png</file>
+        <file alias="stalker0">images/Stalker.png</file>
+        <file alias="stalker1">images/Stalker1.png</file>
+        <file alias="stalkerAttack">images/StalkerAttack.png</file>
     </qresource>
 </RCC>

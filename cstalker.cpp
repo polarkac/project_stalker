@@ -5,7 +5,8 @@ CStalker::CStalker()
     m_iPosX = 100;
     m_iPosY = 400;
     m_imgStalker = new QImage;
-    m_imgStalker->load(":/images/online");
+    m_imgStalker->load(":/images/stalker0");
+    *m_imgStalker = m_imgStalker->scaledToWidth(50);
     m_iJump = 0;
     m_iWalk = 0;
 }
