@@ -5,7 +5,7 @@
 #include <QtGui>
 #include <QObject>
 
-enum Side {LEFT, RIGHT};
+enum State {LEFT, RIGHT, JUMP, CROUCH};
 
 class CStalker : public QObject
 {
@@ -15,27 +15,20 @@ public:
     explicit CStalker();
     ~CStalker();
 
-    int GetPosX() { return iPosX; };
-    int GetPosY() { return iPosY; };
-    const QImage GetImage() { return *imgStalker; };
-    void Walk(Side orientation);
-    void Jump();
-    short int bWalk;
+    QGraphicsPixmapItem *GetImage();
+    void Walk();
 
 private:
-    int iPosX;
-    int iPosY;
-
-    QImage *imgStalker;
-    int iHealth;
-    int iRadiation;
-    short int bJump;
-
-    int maxJump;
+    int m_iPosX;
+    int m_iPosY;
+    QGraphicsPixmapItem *m_imgStalker;
+    int m_iHealth;
+    int m_iRadiation;
+    State m_actualState;
+    QTimeLine *timer;
+    QGraphicsItemAnimation *animation;
 
 public slots:
-    void HandleJump();
-    void HandleWalk();
 };
 
 #endif // CSTALKER_H

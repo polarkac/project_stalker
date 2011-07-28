@@ -12,10 +12,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cstalker.cpp
+    cstalker.cpp \
+    cscene.cpp
 
 HEADERS  += mainwindow.h \
-    cstalker.h
+    cstalker.h \
+    cscene.h
 
 FORMS    += mainwindow.ui
 

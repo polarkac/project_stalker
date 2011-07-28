@@ -2,64 +2,63 @@
 
 CStalker::CStalker()
 {
-    iPosX = 100;
-    iPosY = 400;
-    imgStalker = new QImage;
-    imgStalker->load(":/images/online");
-    bJump = 0;
-    bWalk=0;
+    m_iPosX = 0;
+    m_iPosY = 300;
+    m_actualState = JUMP;
+    m_imgStalker = new QGraphicsPixmapItem[4];
+
+    m_imgStalker[LEFT].setPixmap(QPixmap(":/images/online"));
+    m_imgStalker[LEFT].setPos(m_iPosX, m_iPosY);
+
+    m_imgStalker[RIGHT].setPixmap(QPixmap(":/images/busy"));
+    m_imgStalker[RIGHT].setPos(m_iPosX, m_iPosY);
+
+    m_imgStalker[JUMP].setPixmap(QPixmap(":/images/offline"));
+    m_imgStalker[JUMP].setPos(m_iPosX, m_iPosY);
+
+    m_imgStalker[CROUCH].setPixmap(QPixmap(":/images/busy"));
+    m_imgStalker[CROUCH].setPos(m_iPosX, m_iPosY);
+
+    timer = new QTimeLine(200);
+    animation = new QGraphicsItemAnimation();
 }
 
 CStalker::~CStalker()
 {
-    delete imgStalker;
+    delete [] m_imgStalker;
 }
 
-void CStalker::Walk(Side orientation)
+QGraphicsPixmapItem *CStalker::GetImage()
 {
-        if(orientation==LEFT)
-            bWalk=-1;
-        else
-            bWalk=1;
-}
+    QGraphicsPixmapItem *imgStalker;
 
-void CStalker::HandleWalk()
-{
-    if(bWalk<0)
+    switch(m_actualState)
     {
-        iPosX -= 3;
-        bWalk--;
+    case LEFT:
+        imgStalker = &m_imgStalker[LEFT]; break;
+    case RIGHT:
+        imgStalker = &m_imgStalker[RIGHT]; break;
+    case JUMP:
+        imgStalker = &m_imgStalker[JUMP]; break;
+    case CROUCH:
+        imgStalker = &m_imgStalker[CROUCH]; break;
+    default:
+        imgStalker = &m_imgStalker[RIGHT];
     }
-    else if(bWalk>0)
-    {
-        iPosX += 3;
-        bWalk++;
-    }
+
+    return imgStalker;
 }
 
-void CStalker::HandleJump()
+void CStalker::Walk()
 {
-    if(bJump)
-    {
-        if(iPosY <= maxJump)
-            bJump = 2;
-        if(bJump == 1)
-        {
-            iPosY -= 5;
-        }
-        else if(bJump == 2)
-        {
-            iPosY += 5;
-        }
-        if(iPosY >= (maxJump + 100))
-            bJump = 0;
-    }
-}
-
-void CStalker::Jump()
-{
-    if(bJump > 0)
+    if(timer->state() == QTimeLine::Running)
         return;
-    maxJump = iPosY - 100;
-    bJump = 1;
+
+    animation->setItem(&m_imgStalker[m_actualState]);
+    animation->setTimeLine(timer);
+
+    animation->setPosAt(1, QPointF(m_iPosX += 20, m_iPosY));
+
+    timer->start();
 }
+

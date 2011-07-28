@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtGui>
+#include "cscene.h"
+#include "cstalker.h"
 
 namespace Ui {
     class MainWindow;
@@ -19,14 +21,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    int someNumber;
-    bool bEnd;
-
-    void keyPressEvent(QKeyEvent *);
-    void keyReleaseEvent(QKeyEvent *);
-
-protected:
-    void paintEvent(QPaintEvent *);
 };
 
 #endif // MAINWINDOW_H
