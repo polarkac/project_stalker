@@ -3,6 +3,8 @@
 #include "cstalker.h"
 #include "cscene.h"
 
+
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

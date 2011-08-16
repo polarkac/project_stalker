@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtCore>
 #include <QtGui>
+#include <QtOpenGL/QtOpenGL>
 #include "cscene.h"
 #include "cstalker.h"
 

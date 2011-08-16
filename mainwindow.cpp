@@ -9,9 +9,13 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     hero = new CStalker;
     scene = new CScene;
 
+    QGLWidget *ogl = new QGLWidget(QGLFormat(QGL::SampleBuffers));
+
+    ui->graphicsView->setViewport(ogl);
     ui->graphicsView->setScene(scene);
     ui->graphicsView->setSceneRect(0, 0, 800, 600);
 

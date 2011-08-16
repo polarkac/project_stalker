@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT       += opengl
 
 TARGET = projekt_stalker
 TEMPLATE = app
