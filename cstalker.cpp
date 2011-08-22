@@ -75,6 +75,8 @@ void CStalker::HandleWalk()
 //    }
 }
 
+
+
 void CStalker::HandleJump()
 {
     if(m_iJumpSpeed != 0)

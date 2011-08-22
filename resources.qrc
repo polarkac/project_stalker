@@ -1,9 +1,9 @@
 <RCC>
     <qresource prefix="/images">
-        <file alias="online">images/online.png</file>
         <file alias="background">images/Background.png</file>
         <file alias="busy">images/busy.png</file>
         <file alias="offline">images/offline.png</file>
         <file alias="chest">images/chest.png</file>
+        <file alias="online">images/online.png</file>
     </qresource>
 </RCC>
