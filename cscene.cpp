@@ -1,14 +1,13 @@
 #include "cscene.h"
 
+#define WALK_SPEED 6
+#define JUMP_SPEED 6
+
 CScene::CScene(QObject *parent) :
     QGraphicsScene(parent)
 {
     m_timer = new QTimer(this);
     m_timer->start(25);
-
-    extern CStalker *hero;
-    connect(m_timer, SIGNAL(timeout()), hero, SLOT(HandleWalk()));
-    connect(m_timer, SIGNAL(timeout()), hero, SLOT(HandleJump()));
 
     m_actualKey.bLArrow = FALSE;
     m_actualKey.bRArrow = FALSE;
@@ -21,13 +20,11 @@ void CScene::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
         case Qt::Key_Right:
-            hero->SetWalk(TRUE, RIGHT);
-            m_actualKey.bRArrow = TRUE; break;
+            hero->SetWalk(WALK_SPEED, RIGHT); break;
         case Qt::Key_Left:
-            hero->SetWalk(TRUE, LEFT);
-            m_actualKey.bLArrow = TRUE; break;
+            hero->SetWalk(-WALK_SPEED, LEFT); break;
         case Qt::Key_Space:
-            hero->SetJump();
+            hero->SetJump(JUMP_SPEED); break;
     }
 }
 
@@ -37,11 +34,9 @@ void CScene::keyReleaseEvent(QKeyEvent *event)
     switch(event->key())
     {
         case Qt::Key_Right:
-            hero->SetWalk(FALSE);
-            m_actualKey.bRArrow = FALSE; break;
+            hero->SetWalk(0, RIGHT); break;
         case Qt::Key_Left:
-            hero->SetWalk(FALSE);
-            m_actualKey.bLArrow = FALSE; break;
+            hero->SetWalk(0, LEFT); break;
     }
 }
 

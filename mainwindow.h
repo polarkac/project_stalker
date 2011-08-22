@@ -7,6 +7,7 @@
 #include <QtOpenGL/QtOpenGL>
 #include "cscene.h"
 #include "cstalker.h"
+#include "citem.h"
 
 namespace Ui {
     class MainWindow;

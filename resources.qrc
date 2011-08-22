@@ -4,5 +4,6 @@
         <file alias="background">images/Background.png</file>
         <file alias="busy">images/busy.png</file>
         <file alias="offline">images/offline.png</file>
+        <file alias="chest">images/chest.png</file>
     </qresource>
 </RCC>

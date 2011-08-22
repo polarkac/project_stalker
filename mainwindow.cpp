@@ -1,8 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-CStalker *hero;
 CScene *scene;
+CStalker *hero;
+CItem *items;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,20 +11,23 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    hero = new CStalker;
-    scene = new CScene;
+    scene = new CScene(this);
+    hero = new CStalker(scene);
+    items = new CItem[5];
+    //items[1].SetItem(":/images/chest", 80, 300, 3);
+    items[2].SetItem(":/images/chest", 0, 380, 3);
+    items[3].SetItem(":/images/chest", 0, 200, 3);
 
-    QGLWidget *ogl = new QGLWidget(QGLFormat(QGL::SampleBuffers));
-
-    ui->graphicsView->setViewport(ogl);
+    ui->graphicsView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
     ui->graphicsView->setScene(scene);
-    ui->graphicsView->setSceneRect(0, 0, 800, 600);
-
-    scene->addItem(hero->GetImage());
+    scene->setSceneRect(0, 0, 800, 600);
 }
 
 
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete items;
+    delete hero;
+    delete scene;
 }
