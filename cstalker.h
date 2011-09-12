@@ -5,6 +5,9 @@
 #include <QtGui>
 #include <QObject>
 
+#define WALK_SPEED 5
+#define JUMP_SPEED 5
+
 enum State {STANDING, WALKING, JUMPING, FALLING};
 enum Direction {LEFT, RIGHT};
 
@@ -17,8 +20,9 @@ public:
     ~CStalker();
 
     QGraphicsPixmapItem *GetImage();
-    void SetWalk(int iSpeed = 6, Direction side = RIGHT);
-    void SetJump(int iSpeed = 6);
+    void SetWalk(Direction side = RIGHT);
+    void StopWalk(Direction side = RIGHT);
+    void SetJump();
 
 
 private:

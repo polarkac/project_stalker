@@ -1,8 +1,5 @@
 #include "cscene.h"
 
-#define WALK_SPEED 6
-#define JUMP_SPEED 6
-
 CScene::CScene(QObject *parent) :
     QGraphicsScene(parent)
 {
@@ -20,11 +17,11 @@ void CScene::keyPressEvent(QKeyEvent *event)
     switch(event->key())
     {
         case Qt::Key_Right:
-            hero->SetWalk(WALK_SPEED, RIGHT); break;
+            hero->SetWalk(RIGHT); break;
         case Qt::Key_Left:
-            hero->SetWalk(-WALK_SPEED, LEFT); break;
+            hero->SetWalk(LEFT); break;
         case Qt::Key_Space:
-            hero->SetJump(JUMP_SPEED); break;
+            hero->SetJump(); break;
     }
 }
 
@@ -34,9 +31,9 @@ void CScene::keyReleaseEvent(QKeyEvent *event)
     switch(event->key())
     {
         case Qt::Key_Right:
-            hero->SetWalk(0, RIGHT); break;
+            hero->StopWalk(RIGHT); break;
         case Qt::Key_Left:
-            hero->SetWalk(0, LEFT); break;
+            hero->StopWalk(LEFT); break;
     }
 }
 

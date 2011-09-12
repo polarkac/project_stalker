@@ -30,20 +30,34 @@ QGraphicsPixmapItem *CStalker::GetImage()
     return m_imgStalker;
 }
 
-void CStalker::SetWalk(int iSpeed, Direction side)
+void CStalker::SetWalk(Direction side)
 {
-    m_iWalkSpeed = iSpeed;
-    if(m_actualState != JUMPING || m_actualState != FALLING)
+    switch(side)
+    {
+    case RIGHT:
+        m_iWalkSpeed = WALK_SPEED; break;
+    case LEFT:
+        m_iWalkSpeed = -WALK_SPEED; break;
+    }
+
+    if(m_actualState != JUMPING && m_actualState != FALLING)
         m_actualState = WALKING;
 }
 
-void CStalker::SetJump(int iSpeed)
+void CStalker::StopWalk(Direction side)
+{
+    m_iWalkSpeed = 0;
+    if(m_actualState != JUMPING && m_actualState != FALLING)
+        m_actualState = STANDING;
+}
+
+void CStalker::SetJump()
 {
     if(m_actualState == JUMPING || m_actualState == FALLING)
         return;
-    m_iJumpSpeed = iSpeed;
+    m_iJumpSpeed = JUMP_SPEED;
     m_actualState = JUMPING;
-    m_iMaxJump = m_imgStalker->pos().y() - 50;
+    m_iMaxJump = m_imgStalker->pos().y() - 60;
 }
 
 void CStalker::HandleWalk()
@@ -71,7 +85,7 @@ void CStalker::HandleWalk()
         if(!scene->collidingItems(m_imgStalker).isEmpty())
             m_imgStalker->setPos(prevPos);
 
-        if(m_actualState != JUMPING || m_actualState != FALLING)
+        if(m_actualState != JUMPING && m_actualState != FALLING)
         {
             int iPrevJumpSpeed = m_iJumpSpeed;
             State prevState = m_actualState;
@@ -115,6 +129,8 @@ void CStalker::HandleJump()
                 QList<QGraphicsItem *> colidList = scene->collidingItems(m_imgStalker);
                 m_imgStalker->setPos(m_imgStalker->pos().x(), colidList[0]->pos().y() - m_imgStalker->pixmap().height() - 1);
                 m_actualState = STANDING;
+                m_iJumpSpeed = 0;
+                m_iMaxJump = 0;
             }
         }
     }
