@@ -86,18 +86,18 @@ void CStalker::HandleWalk()
         // collide item on new location? back to old one
         if(!scene->collidingItems(m_imgStalker).isEmpty())
             m_imgStalker->setPos(prevPos);
+    }
 
-        // "fake" gravity when walk in progress
-        if(m_actualState != JUMPING && m_actualState != FALLING)
-        {
-            int iPrevJumpSpeed = m_iJumpSpeed;
-            State prevState = m_actualState;
-            m_actualState = FALLING;
-            m_iJumpSpeed = JUMP_SPEED;
-            HandleJump();
-            m_actualState = prevState;
-            m_iJumpSpeed = iPrevJumpSpeed;
-        }
+    // "fake" gravity when walk in progress
+    if(m_actualState != JUMPING && m_actualState != FALLING)
+    {
+        int iPrevJumpSpeed = m_iJumpSpeed;
+        State prevState = m_actualState;
+        m_actualState = FALLING;
+        m_iJumpSpeed = JUMP_SPEED;
+        HandleJump();
+        m_actualState = prevState;
+        m_iJumpSpeed = iPrevJumpSpeed;
     }
 }
 
@@ -127,7 +127,7 @@ void CStalker::HandleJump()
         }
         else if(m_actualState == FALLING || m_actualState == WALKING) // falling handler
         {
-            m_imgStalker->moveBy(0, m_iJumpSpeed);
+            m_imgStalker->moveBy(0, m_iJumpSpeed * 1.4);
             if(!scene->collidingItems(m_imgStalker).isEmpty())
             {
                 QList<QGraphicsItem *> colidList = scene->collidingItems(m_imgStalker);
