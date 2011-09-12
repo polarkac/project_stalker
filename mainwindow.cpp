@@ -14,17 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     scene = new CScene;
     hero = new CStalker;
     items = new CItem[10];
-    int iCounter = 0;
-    items[iCounter++].SetItem(":/images/chest", 0, 380, 3);
-    items[iCounter++].SetItem(":/images/chest", 0, 200, 3);
-    items[iCounter++].SetItem(":/images/chest", 0, 250, 3);
-    items[iCounter++].SetItem(":/images/chest", 0, 300, 3);
-    items[iCounter++].SetItem(":/images/chest", 0, 350, 3);
-    items[iCounter++].SetItem(":/images/chest", 0, 400, 3);
-    items[iCounter++].SetItem(":/images/chest", 0, 450, 3);
-    items[iCounter++].SetItem(":/images/chest", 0, 500, 3);
-    items[iCounter++].SetItem(":/images/chest", 0, 550, 3);
-    items[iCounter++].SetItem(":/images/chest", 0, 600, 3);
+    for(int a = 0; a < 10; a++)
+        items[a].SetItem(":/images/chest", a*40, 372, 3);
 
     ui->graphicsView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
     ui->graphicsView->setScene(scene);
