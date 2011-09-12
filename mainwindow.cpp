@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-CScene *scene;
-CStalker *hero;
-CItem *items;
+CScene *scene = NULL;
+CStalker *hero = NULL;
+CItem *items = NULL;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -11,12 +11,20 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    scene = new CScene(this);
-    hero = new CStalker(scene);
-    items = new CItem[5];
-    //items[1].SetItem(":/images/chest", 80, 300, 3);
-    items[2].SetItem(":/images/chest", 0, 380, 3);
-    items[3].SetItem(":/images/chest", 0, 200, 3);
+    scene = new CScene;
+    hero = new CStalker;
+    items = new CItem[10];
+    int iCounter = 0;
+    items[iCounter++].SetItem(":/images/chest", 0, 380, 3);
+    items[iCounter++].SetItem(":/images/chest", 0, 200, 3);
+    items[iCounter++].SetItem(":/images/chest", 0, 250, 3);
+    items[iCounter++].SetItem(":/images/chest", 0, 300, 3);
+    items[iCounter++].SetItem(":/images/chest", 0, 350, 3);
+    items[iCounter++].SetItem(":/images/chest", 0, 400, 3);
+    items[iCounter++].SetItem(":/images/chest", 0, 450, 3);
+    items[iCounter++].SetItem(":/images/chest", 0, 500, 3);
+    items[iCounter++].SetItem(":/images/chest", 0, 550, 3);
+    items[iCounter++].SetItem(":/images/chest", 0, 600, 3);
 
     ui->graphicsView->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
     ui->graphicsView->setScene(scene);
@@ -26,8 +34,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
-    delete ui;
     delete items;
     delete hero;
     delete scene;
+    delete ui;
 }

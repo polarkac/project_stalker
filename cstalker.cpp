@@ -51,9 +51,18 @@ void CStalker::HandleWalk()
     extern CScene *scene;
     // if statements to not go behind the scene
     if((m_imgStalker->pos().x() + m_imgStalker->pixmap().width()) >= scene->width())
+    {
         m_imgStalker->setPos(scene->width() - m_imgStalker->pixmap().width(), m_imgStalker->pos().y());
+        if(m_iWalkSpeed > 0)
+            return;
+    }
     else if(m_imgStalker->pos().x() <= 0)
+    {
         m_imgStalker->setPos(0, m_imgStalker->pos().y());
+        if(m_iWalkSpeed < 0)
+            return;
+    }
+
 
     if(m_iWalkSpeed != 0)
     {
@@ -61,18 +70,18 @@ void CStalker::HandleWalk()
         m_imgStalker->moveBy(m_iWalkSpeed, 0);
         if(!scene->collidingItems(m_imgStalker).isEmpty())
             m_imgStalker->setPos(prevPos);
-    }
 
-//    if(m_actualState != JUMPING || m_actualState != FALLING)
-//    {
-//        int iPrevJumpSpeed = m_iJumpSpeed;
-//        State prevState = m_actualState;
-//        m_actualState = FALLING;
-//        m_iJumpSpeed = 6;
-//        HandleJump();
-//        m_actualState = prevState;
-//        m_iJumpSpeed = iPrevJumpSpeed;
-//    }
+        if(m_actualState != JUMPING || m_actualState != FALLING)
+        {
+            int iPrevJumpSpeed = m_iJumpSpeed;
+            State prevState = m_actualState;
+            m_actualState = FALLING;
+            m_iJumpSpeed = 6;
+            HandleJump();
+            m_actualState = prevState;
+            m_iJumpSpeed = iPrevJumpSpeed;
+        }
+    }
 }
 
 
@@ -93,7 +102,8 @@ void CStalker::HandleJump()
             m_imgStalker->moveBy(0, -m_iJumpSpeed);
             if(!scene->collidingItems(m_imgStalker).isEmpty())
             {
-                m_imgStalker->setPos(prevPos);
+                QList<QGraphicsItem *> colidList = scene->collidingItems(m_imgStalker);
+                m_imgStalker->setPos(m_imgStalker->pos().x(), colidList[0]->pos().y() + colidList[0]->boundingRect().height() + 1);
                 m_actualState = FALLING;
             }
         }
@@ -102,7 +112,8 @@ void CStalker::HandleJump()
             m_imgStalker->moveBy(0, m_iJumpSpeed);
             if(!scene->collidingItems(m_imgStalker).isEmpty())
             {
-                m_imgStalker->setPos(prevPos);
+                QList<QGraphicsItem *> colidList = scene->collidingItems(m_imgStalker);
+                m_imgStalker->setPos(m_imgStalker->pos().x(), colidList[0]->pos().y() - m_imgStalker->pixmap().height() - 1);
                 m_actualState = STANDING;
             }
         }
