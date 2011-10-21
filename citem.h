@@ -7,7 +7,7 @@
 #include <QString>
 #include "cscene.h"
 
-enum Types {ITEM, EMPTY};
+enum Types {ITEM, EMPTY, BACKGROUND};
 
 class CItem : public QObject
 {

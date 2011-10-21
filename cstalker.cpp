@@ -8,7 +8,7 @@ CStalker::CStalker(QObject *parent) :
     m_imgStalker = new QGraphicsPixmapItem;
     m_imgStalker->setPixmap(QPixmap(":/images/online"));
     m_imgStalker->setPos(0, 310);
-    m_imgStalker->setZValue(3);
+    m_imgStalker->setZValue(1);
     m_iWalkSpeed = 0;
     m_iJumpSpeed = 0;
 

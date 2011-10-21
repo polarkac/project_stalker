@@ -8,6 +8,7 @@
 #include "cscene.h"
 #include "cstalker.h"
 #include "citem.h"
+#include "cmap.h"
 
 namespace Ui {
     class MainWindow;

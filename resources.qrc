@@ -5,5 +5,11 @@
         <file alias="offline">images/offline.png</file>
         <file alias="chest">images/chest.png</file>
         <file alias="online">images/online.png</file>
+        <file alias="dirt">images/dirt.png</file>
+        <file alias="stone">images/stone.png</file>
+        <file alias="wood">images/wood.png</file>
+    </qresource>
+    <qresource prefix="/maps">
+        <file alias="testMap">images/testMap.map</file>
     </qresource>
 </RCC>
